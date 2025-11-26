@@ -1,2 +1,4 @@
 # Scrum
-mijner
+
+groepsleider: Myrthe
+scrum-master: Raymond
