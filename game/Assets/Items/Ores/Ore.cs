@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class Ore : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int hp = 3;
+
+    public void Hit()
     {
-        
+        hp--;
+
+        if (hp <= 0)
+        {
+            Break();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Break()
     {
-        
+        Destroy(gameObject);
     }
 }
