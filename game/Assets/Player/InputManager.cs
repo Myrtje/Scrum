@@ -1,39 +1,39 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 namespace game.Manager
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private PlayerInput PlayerInput;
+        [SerializeField] private PlayerInput playerInput;
 
         public Vector2 Move { get; private set; }
+        public bool InteractPressed { get; private set; }
 
         private InputActionMap _currentMap;
 
         private void Awake()
         {
-            _currentMap = PlayerInput.currentActionMap;
+            _currentMap = playerInput.currentActionMap;
 
-            _currentMap.FindAction("Move").performed += onMove;
-            _currentMap.FindAction("Move").canceled += onMove;
+            _currentMap.FindAction("Move").performed += OnMove;
+            _currentMap.FindAction("Move").canceled += OnMove;
+
+            _currentMap.FindAction("Interact").performed += OnInteract;
         }
 
-        private void onMove(InputAction.CallbackContext context)
+        private void OnMove(InputAction.CallbackContext context)
         {
             Move = context.ReadValue<Vector2>();
         }
 
-        private void OnEnable()
+        private void OnInteract(InputAction.CallbackContext context)
         {
-            _currentMap.Enable();
+            InteractPressed = context.performed;
         }
 
-        private void OnDisable()
-        {
-            _currentMap.Disable();
-        }
+        private void OnEnable() => _currentMap.Enable();
+        private void OnDisable() => _currentMap.Disable();
     }
 }
