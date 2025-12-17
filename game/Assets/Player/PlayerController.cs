@@ -10,10 +10,13 @@ namespace game.PlayerControl
     {
         Rigidbody2D _rb;
         InputManager _inputM;
+        public MovingBar movingBar;
+        public GameObject movingBarHUD;
         public bool canMove = true;
         [SerializeField] private float moveSpeed;
         Animator anim;
-        Transform Oretr;
+        private Ore currentOre;
+
 
 
         private void Start()
@@ -21,21 +24,25 @@ namespace game.PlayerControl
             _rb = GetComponent<Rigidbody2D>();
             _inputM = GetComponent<InputManager>();
             anim = GetComponent<Animator>();
-            Oretr = GameObject.FindWithTag("Ore").transform;
         }
 
         private void FixedUpdate()
         {
-            Move();
-        }
-
-        void Update()
-        {
             if (canMove == true)
             {
-                CloseEnough();
+                Move();
             }
         }
+
+        public void Update()
+        {
+            if (_inputM.InteractPressed && currentOre != null && canMove)
+            {
+                movingBar.StartMiniGame(currentOre);
+            }
+
+        }
+
 
         private void Move()
         {
@@ -44,20 +51,27 @@ namespace game.PlayerControl
             anim.SetBool("WalkingDown", _inputM.Move == Vector2.down);
             anim.SetBool("WalkingLeft", _inputM.Move == Vector2.left);
             anim.SetBool("WalkingRight", _inputM.Move == Vector2.right);
-
         }
 
-        void CloseEnough()
+
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            if (Vector2.Distance(transform.position, Oretr.position) < 1.2)
+            if (other.CompareTag("Ore"))
             {
-                if (_inputM.InteractPressed == true)
-                {
-                    canMove = false;
-                    //de interact voor de game en de player niet bewgen
-                }
-                //hier de interact en de player stoppen met bewegen door de player script stoppen
+                currentOre = other.GetComponent<Ore>();
             }
         }
+
+        public void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Ore"))
+            {
+                if (other.GetComponent<Ore>() == currentOre)
+                {
+                    currentOre = null;
+                }
+            }
+        }
+
     }
 }

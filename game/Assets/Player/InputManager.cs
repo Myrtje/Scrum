@@ -10,6 +10,7 @@ namespace game.Manager
 
         public Vector2 Move { get; private set; }
         public bool InteractPressed { get; private set; }
+        public bool InteractSpaceMiningPuzzle { get; private set; }
 
         private InputActionMap _currentMap;
 
@@ -21,6 +22,10 @@ namespace game.Manager
             _currentMap.FindAction("Move").canceled += OnMove;
 
             _currentMap.FindAction("Interact").performed += OnInteract;
+            _currentMap.FindAction("Interact").canceled += OnInteract;
+
+            _currentMap.FindAction("InteractMiningPuzzle").performed += OnInteractMiningPuzzle;
+            _currentMap.FindAction("InteractMiningPuzzle").canceled += OnInteractMiningPuzzle;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -31,6 +36,11 @@ namespace game.Manager
         private void OnInteract(InputAction.CallbackContext context)
         {
             InteractPressed = context.performed;
+        }
+
+        private void OnInteractMiningPuzzle(InputAction.CallbackContext context)
+        {
+            InteractSpaceMiningPuzzle = context.performed;
         }
 
         private void OnEnable() => _currentMap.Enable();
