@@ -15,7 +15,8 @@ namespace game.PlayerControl
         public bool canMove = true;
         [SerializeField] private float moveSpeed;
         Animator anim;
-        public bool nexttoOre = false;
+        private Ore currentOre;
+
 
 
         private void Start()
@@ -35,10 +36,11 @@ namespace game.PlayerControl
 
         public void Update()
         {
-            if (_inputM.InteractPressed == true  && nexttoOre == true)
+            if (_inputM.InteractPressed && currentOre != null && canMove)
             {
-                movingBar.startminigame = true;
+                movingBar.StartMiniGame(currentOre);
             }
+
         }
 
 
@@ -56,14 +58,20 @@ namespace game.PlayerControl
         {
             if (other.CompareTag("Ore"))
             {
-                print("iets");
-                nexttoOre = true;
+                currentOre = other.GetComponent<Ore>();
             }
         }
+
         public void OnTriggerExit2D(Collider2D other)
         {
-            print("nogiets");
-            nexttoOre = false;
+            if (other.CompareTag("Ore"))
+            {
+                if (other.GetComponent<Ore>() == currentOre)
+                {
+                    currentOre = null;
+                }
+            }
         }
+
     }
 }
