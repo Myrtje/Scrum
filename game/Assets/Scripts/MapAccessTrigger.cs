@@ -4,29 +4,19 @@ public class MapAccessTrigger : MonoBehaviour
 {
     private MapManager mapManager;
 
-    void Start()
-    {
-        mapManager = FindObjectOfType<MapManager>();
-        if (mapManager == null)
-        {
-            Debug.LogError("Geen mapManager");
-        }
-    }
-
+    void Start() => mapManager = FindObjectOfType<MapManager>();
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && mapManager != null)
-        {
-            mapManager.SetMapAccess(true);
-        }
+        if (other.CompareTag("Player")) mapManager?.SetMapAccess(true);   
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && mapManager != null)
+        if (other.CompareTag("Player"))
         {
-            mapManager.SetMapAccess(false);
-            mapManager.CloseMap();
+            mapManager?.SetMapAccess(false);
+            mapManager?.CloseMap();
         }
     }
 }

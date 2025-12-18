@@ -16,32 +16,19 @@ public class MapManager : MonoBehaviour
     private bool isMapOpen = false;
     private bool canAccessMap = false;
 
-    void Start()
-    {
-        if (mapCamera != null)
-        {
-            mapCamera.enabled = false;
-        }
-    }
+    void Start() => mapCamera.enabled = false;
 
-    public void SetMapAccess(bool access)
-    {
-        canAccessMap = access;
-    }
+    public void SetMapAccess(bool access) => canAccessMap = access;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if (isMapOpen)
-            {
-                CloseMap();
-            }
-            else if (canAccessMap)
-            {
-                OpenMap();
-            }
+            if (isMapOpen) CloseMap();
+            else if (canAccessMap) OpenMap(); 
         }
+        
+        if (Input.GetKeyDown(KeyCode.Escape) && isMapOpen) CloseMap();
     }
 
     public void OpenMap()
@@ -65,8 +52,10 @@ public class MapManager : MonoBehaviour
         mainCamera.enabled = true;
 
         if (playerMovementScript != null) playerMovementScript.enabled = true;
-        if (Hud != null) Hud.enabled = true;
-
-        isMapOpen = false;
+        if (Hud != null) 
+        {
+            Hud.enabled = true;
+            isMapOpen = false;
+        }
     }
 }
