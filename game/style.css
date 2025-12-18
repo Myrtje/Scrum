@@ -1,0 +1,43 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f8a000;
+  font-size: 16pt;
+}
+h1 {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #ebddca;
+  padding: 0% 5%;
+}
+
+.news {
+  width: 100%;
+  order: 2;
+}
+
+#breaking {
+  order: 1;
+  width: 100%;
+}
+
+#breaking h3 {
+  font-size: 40px;
+}
+
+.news h3 {
+  display: flex;
+  justify-content: center;
+}
+
+.news:not(:first-child) {
+  width: 30%;
+}
