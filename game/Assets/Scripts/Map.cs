@@ -3,70 +3,36 @@ using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
-    [Header("Camera's")]
-    public Camera mainCamera;
-    public Camera mapCamera;
-    
-    [Header("Speler Componenten")]
-    public MonoBehaviour playerMovementScript;
-    
-    [Header("UI Componenten")]
+    [Header("Cameras & UI")]
+    public Camera mainCamera, mapCamera;
     public Canvas Hud;
 
-    private bool isMapOpen = false;
-    private bool canAccessMap = false;
+    [Header("Player")]
+    public MonoBehaviour playerMovementScript;
 
-    void Start()
-    {
-        if (mapCamera != null)
-        {
-            mapCamera.enabled = false;
-        }
-    }
+    private bool isMapOpen, canAccessMap;
 
-    public void SetMapAccess(bool access)
-    {
-        canAccessMap = access;
-    }
+    void Start() => mapCamera.enabled = false;
+
+    public void SetMapAccess(bool access) => canAccessMap = access;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (isMapOpen)
-            {
-                CloseMap();
-            }
-            else if (canAccessMap)
-            {
-                OpenMap();
-            }
-        }
+        bool inputExit = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Escape);
+
+        if (isMapOpen && inputExit) CloseMap();
+        else if (!isMapOpen && canAccessMap && Input.GetKeyDown(KeyCode.M)) OpenMap();
     }
 
-    public void OpenMap()
+    public void OpenMap() => SetMapState(true);
+    public void CloseMap() => SetMapState(false);
+
+    private void SetMapState(bool open)
     {
-        if (mapCamera == null || mainCamera == null) return;
-        
-        mainCamera.enabled = false;
-        mapCamera.enabled = true;
-        
-        if (playerMovementScript != null) playerMovementScript.enabled = false;
-        if (Hud != null) Hud.enabled = false;
-        
-        isMapOpen = true;
-    }
-
-    public void CloseMap()
-    {
-        if (mapCamera == null || mainCamera == null) return;
-
-        mapCamera.enabled = false;
-        mainCamera.enabled = true;
-
-        if (playerMovementScript != null) playerMovementScript.enabled = true;
-        if (Hud != null) Hud.enabled = true;
-
-        isMapOpen = false;
+    isMapOpen = open;
+    if (mainCamera) mainCamera.enabled = !open;
+    if (mapCamera) mapCamera.enabled = open;
+    if (playerMovementScript) playerMovementScript.enabled = !open;
+    if (Hud) Hud.enabled = !open;
     }
 }
