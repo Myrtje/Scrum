@@ -1,24 +1,18 @@
 using UnityEngine;
 
-public class Blokken : MonoBehaviour
+public class BlokkenManager : MonoBehaviour
 {
     private Rigidbody2D selectedRb;
     private Vector2 offset;
 
-    private Collider2D karOreCollider;
-    private bool levelGelukt = false;
-
-    void Start()
-    {
-        GameObject karOre = GameObject.Find("kar ore");
-        if (karOre != null)
-            karOreCollider = karOre.GetComponent<Collider2D>();
-    }
-
     void Update()
     {
-        if (levelGelukt) return;
+        HandleDrag();
+    }
 
+    private void HandleDrag()
+    {
+        // Muisknop ingedrukt
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -31,6 +25,7 @@ public class Blokken : MonoBehaviour
 
             offset = selectedRb.position - mousePos;
 
+            // Stel beperkingen in
             selectedRb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             if (hit.collider.CompareTag("Horizontal"))
@@ -39,12 +34,14 @@ public class Blokken : MonoBehaviour
                 selectedRb.constraints |= RigidbodyConstraints2D.FreezePositionX;
         }
 
+        // Blok volgen
         if (Input.GetMouseButton(0) && selectedRb != null)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             selectedRb.MovePosition(mousePos + offset);
         }
 
+        // Loslaten
         if (Input.GetMouseButtonUp(0) && selectedRb != null)
         {
             if (selectedRb.CompareTag("Horizontal"))
@@ -56,34 +53,5 @@ public class Blokken : MonoBehaviour
 
             selectedRb = null;
         }
-
-        CheckFinish();
-    }
-
-    void CheckFinish()
-    {
-        if (karOreCollider == null) return;
-
-        Collider2D finish = Physics2D.OverlapPoint(
-            karOreCollider.bounds.center,
-            LayerMask.GetMask("Finish")
-        );
-
-        if (finish != null && finish.CompareTag("Finish"))
-        {
-            Debug.Log("LEVEL GELUKT!");
-            LevelGelukt();
-        }
-    }
-
-    void LevelGelukt()
-    {
-        levelGelukt = true;
-        
-
-        // Hier later:
-        // Time.timeScale = 0;
-        // winPanel.SetActive(true);
-        // SceneManager.LoadScene(...)
     }
 }

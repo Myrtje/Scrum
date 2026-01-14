@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< Updated upstream
   tags: []
-=======
-  tags:
-  - Ore
-  - Horizontal
-  - Vertical
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
