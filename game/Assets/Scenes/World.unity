@@ -150,13 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map
   mainCamera: {fileID: 519420031}
   mapCamera: {fileID: 855902160}
-<<<<<<< Updated upstream
-  Hud: {fileID: 984811911}
-  playerMovementScript: {fileID: 1805189263}
-=======
   playerMovementScript: {fileID: 1805189263}
   Hud: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!4 &2481133
 Transform:
   m_ObjectHideFlags: 0

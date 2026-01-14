@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ore : MonoBehaviour
 {
-    public int hp = 3;
+    public int hp =1;
 
     public void Interact(MovingBar bar)
     {
