@@ -2081,9 +2081,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     - target: {fileID: 4623906388003673859, guid: 13383d05a6cff6a4f8e459cd4304261e, type: 3}
@@ -2091,6 +2094,9 @@ PrefabInstance:
       value: Horizontal
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
