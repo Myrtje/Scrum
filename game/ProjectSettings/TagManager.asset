@@ -5,7 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ore
+<<<<<<< Updated upstream
   - GreenZone
+=======
+  - Horizontal
+  - Vertical
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
