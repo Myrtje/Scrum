@@ -32,6 +32,14 @@ namespace game.PlayerControl
             {
                 Move();
             }
+<<<<<<< Updated upstream
+=======
+        }
+
+        void Update()
+        {
+            CloseEnough();
+>>>>>>> Stashed changes
         }
 
         public void Update()
@@ -56,7 +64,11 @@ namespace game.PlayerControl
 
         public void OnTriggerEnter2D(Collider2D other)
         {
+<<<<<<< Updated upstream
             if (other.CompareTag("Ore"))
+=======
+            if (Vector2.Distance(transform.position, Oretr.position) < 1.2f)
+>>>>>>> Stashed changes
             {
                 currentOre = other.GetComponent<Ore>();
             }

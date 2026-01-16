@@ -92,7 +92,11 @@
                 },
                 {
                     "name": "2D Vector",
+<<<<<<< Updated upstream
                     "id": "d9f5fcfd-854e-4f26-8de0-47414d718407",
+=======
+                    "id": "1d22d293-06c7-4208-b93c-9e154ebb7fc6",
+>>>>>>> Stashed changes
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -103,7 +107,11 @@
                 },
                 {
                     "name": "up",
+<<<<<<< Updated upstream
                     "id": "3e18305c-1c5e-4b98-938b-86802dc9ab16",
+=======
+                    "id": "ae5abc2e-74d0-41f8-96b3-1e2ae982b97f",
+>>>>>>> Stashed changes
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
@@ -114,7 +122,11 @@
                 },
                 {
                     "name": "down",
+<<<<<<< Updated upstream
                     "id": "e8efedc8-8969-4311-88ef-76e2c23466b4",
+=======
+                    "id": "b849160f-2034-4533-8b24-e86a7ea09295",
+>>>>>>> Stashed changes
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
@@ -125,7 +137,11 @@
                 },
                 {
                     "name": "left",
+<<<<<<< Updated upstream
                     "id": "a1c0c8ce-14db-4003-93ef-dba742e63bc5",
+=======
+                    "id": "9ff4fd2f-f0a8-47a3-a861-c4ba4caceab3",
+>>>>>>> Stashed changes
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
@@ -136,7 +152,11 @@
                 },
                 {
                     "name": "right",
+<<<<<<< Updated upstream
                     "id": "0aa34f06-af48-4189-9530-26663528d60d",
+=======
+                    "id": "b8a5c8e4-38ed-4f90-824a-b619a13aba01",
+>>>>>>> Stashed changes
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
