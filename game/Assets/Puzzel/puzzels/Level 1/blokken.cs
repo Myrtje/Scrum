@@ -1,20 +1,57 @@
 using UnityEngine;
 
-public class blokken : MonoBehaviour
+public class BlokkenManager : MonoBehaviour
 {
-    private GameObject OreCar;
-    public GameObject kar1, kar2, kar3, kar4, kar5, kar6, kar7, kar8;
-    
-    void Start()
+    private Rigidbody2D selectedRb;
+    private Vector2 offset;
+
+    void Update()
     {
-        OreCar = GameObject.Find("kar ore").GetComponent<GameObject>();
+        HandleDrag();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void HandleDrag()
     {
-        if(collision.gameObject.name == "kar ore")
+        // Muisknop ingedrukt
+        if (Input.GetMouseButtonDown(0))
         {
-            
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit.collider == null) return;
+
+            selectedRb = hit.collider.GetComponent<Rigidbody2D>();
+            if (selectedRb == null) return;
+
+            offset = selectedRb.position - mousePos;
+
+            // Stel beperkingen in
+            selectedRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            if (hit.collider.CompareTag("Horizontal"))
+                selectedRb.constraints |= RigidbodyConstraints2D.FreezePositionY;
+            else if (hit.collider.CompareTag("Vertical"))
+                selectedRb.constraints |= RigidbodyConstraints2D.FreezePositionX;
+        }
+
+        // Blok volgen
+        if (Input.GetMouseButton(0) && selectedRb != null)
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            selectedRb.MovePosition(mousePos + offset);
+        }
+
+        // Loslaten
+        if (Input.GetMouseButtonUp(0) && selectedRb != null)
+        {
+            if (selectedRb.CompareTag("Horizontal"))
+                selectedRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+            else if (selectedRb.CompareTag("Vertical"))
+                selectedRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            else
+                selectedRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            selectedRb = null;
         }
     }
 }

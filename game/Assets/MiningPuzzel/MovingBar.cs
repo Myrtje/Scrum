@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using game.Manager;
 using game.PlayerControl;
+using TMPro;
+using UnityEngine.UI;
 
 public class MovingBar : MonoBehaviour
 {
@@ -15,8 +17,8 @@ public class MovingBar : MonoBehaviour
     public PlayerController playerController;
     private Ore currentOre;
 
-
-
+     public TextMeshProUGUI scoreText;
+     private int Ironscore = 0;
 
     public float speed = 400f;
     public float distance = 600f;
@@ -63,33 +65,36 @@ public class MovingBar : MonoBehaviour
     }
 
 
-void CheckSuccess()
-{
-    if (input.InteractSpaceMiningPuzzle && !checkedThisPress && startminigame)
+    void CheckSuccess()
     {
-        checkedThisPress = true;
+        if (input.InteractSpaceMiningPuzzle && !checkedThisPress && startminigame)
+        {
+            checkedThisPress = true;
 
-        if (IsOverlapping())
-        {
-            Debug.Log("YOU DID IT");
-            Debug.Log("you get 1 stone");
-        }
-        else
-        {
-            if (currentOre != null)
+            if (IsOverlapping())
             {
+                Ironscore++;
+                scoreText.text = Ironscore.ToString();
                 currentOre.Hit();
+                EndMiniGame();
+                GameManager.Instance.canEnter(Ironscore);
             }
+            else
+            {
+                if (currentOre != null)
+                {
+                    currentOre.Hit();
+                }
 
-            EndMiniGame();
+                EndMiniGame();
+            }
+        }
+
+        if (!input.InteractPressed)
+        {
+            checkedThisPress = false;
         }
     }
-
-    if (!input.InteractPressed)
-    {
-        checkedThisPress = false;
-    }
-}
 
     bool IsOverlapping()
     {
