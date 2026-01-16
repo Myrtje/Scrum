@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Puzzel/puzzels/Level 1/puzzel1.unity
     guid: a3ba8d79b4d6ac04bb1d9454089f69af
+  - enabled: 1
+    path: Assets/Scenes/World.unity
+    guid: 355854e551b7e814aa959a4cce4a2e47
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

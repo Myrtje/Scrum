@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinishTrigger : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class FinishTrigger : MonoBehaviour
             // TODO: pauzeer tijd, toon panel, laad scene, etc.
             // Time.timeScale = 0;
             // winPanel.SetActive(true);
-            // SceneManager.LoadScene(...);
+            SceneManager.LoadScene("World");
         }
     }
 }
