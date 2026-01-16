@@ -73,11 +73,11 @@ public class MovingBar : MonoBehaviour
 
             if (IsOverlapping())
             {
-                //tag is gold 1 gold
                 Ironscore++;
                 scoreText.text = Ironscore.ToString();
                 currentOre.Hit();
                 EndMiniGame();
+                GameManager.Instance.canEnter(Ironscore);
             }
             else
             {
